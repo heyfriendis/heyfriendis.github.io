@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>git提交出现错误</title>
+      <link href="/2022/11/08/git%E6%8F%90%E4%BA%A4%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF/"/>
+      <url>/2022/11/08/git%E6%8F%90%E4%BA%A4%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF/</url>
+      
+        <content type="html"><![CDATA[<p>在提交github代码时偶然遇见的问题</p><h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fatal</span>: unable to access <span class="string">&#x27;https://github.com/heyfriendis/blog.git/&#x27;</span>: <span class="variable constant_">SSL</span> certificate <span class="attr">problem</span>: unable to get local issuer certificate</span><br></pre></td></tr></table></figure><h2 id="原因及解决办法"><a href="#原因及解决办法" class="headerlink" title="原因及解决办法"></a>原因及解决办法</h2><p>这是由于当你通过HTTPS访问Git远程仓库的时候，如果服务器上的SSL证书未经过第三方机构认证，git就会报错。原因是因为未知的没有签署过的证书意味着可能存在很大的风险。解决办法就是通过下面的命令将git中的sslverify关掉：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --system http.<span class="property">sslverify</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>上面这行命令的影响范围是系统当前用户，如果要设置为全局所有用户，可以改成这样：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="variable language_">global</span> http.<span class="property">sslverify</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>如果只是想针对当前仓库进行设置，可以在需要修改的仓库目录下执行：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config http.<span class="property">sslverify</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>node搭建服务器</title>
+      <link href="/2022/11/08/node%E6%90%AD%E5%BB%BA%E5%90%8E%E5%8F%B0/"/>
+      <url>/2022/11/08/node%E6%90%AD%E5%BB%BA%E5%90%8E%E5%8F%B0/</url>
+      
+        <content type="html"><![CDATA[<p>使用node.js搭建你的第一个服务器吧</p><h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y </span><br></pre></td></tr></table></figure><h3 id="新建一个app-js文件"><a href="#新建一个app-js文件" class="headerlink" title="新建一个app.js文件"></a>新建一个app.js文件</h3><h3 id="下载express插件"><a href="#下载express插件" class="headerlink" title="下载express插件"></a>下载express插件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i express -S</span><br></pre></td></tr></table></figure><h3 id="导入express插件"><a href="#导入express插件" class="headerlink" title="导入express插件"></a>导入express插件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br></pre></td></tr></table></figure><h3 id="创建服务器对象"><a href="#创建服务器对象" class="headerlink" title="创建服务器对象"></a>创建服务器对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>()</span><br></pre></td></tr></table></figure><h3 id="监听80端口"><a href="#监听80端口" class="headerlink" title="监听80端口"></a>监听80端口</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">listen</span>(<span class="number">80</span>,<span class="function">() =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;server runing at http://127.0.0.1&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="查看是否运行成功"><a href="#查看是否运行成功" class="headerlink" title="查看是否运行成功"></a>查看是否运行成功</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.<span class="property">js</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/11/06/hello-world/"/>
+      <url>/2022/11/06/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
